@@ -6,7 +6,6 @@ from pythonping import ping
 
 SPEEDTEST_SERVER_ID = '24215'
 
-network_type = sys.argv[1]
 root_dns = (  # in alphabetical order
     '198.41.0.4',
     '199.9.14.201',
@@ -89,8 +88,9 @@ def sum_results(st_r, ping_r, net_type):
     return results
 
 
-if __name__ == '__main__':
-    print(sum_results(
+def get_complete_results(network_type) -> dict:
+    return sum_results(
         speedtest(SPEEDTEST_SERVER_ID),
-        ping_root(root_dns), network_type
-    ))
+        ping_root(root_dns),
+        network_type
+    )
