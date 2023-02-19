@@ -4,20 +4,29 @@ import 'dart:io';
 class InfoProvider {
   static const ipAddressRefreshDelay = Duration(seconds: 30);
 
-  static Stream<List<InternetAddress>> interfacesAddresses() {
-    final controller = StreamController<List<InternetAddress>>();
 
-    Timer.periodic(ipAddressRefreshDelay, (timer) async {
-      final interfaceList = await NetworkInterface.list();
-      List<InternetAddress> address = [];
 
-      for (final interface in interfaceList) {
-        address.addAll(interface.addresses);
-      }
+  static Stream<List<NetworkInterface>> interfacesInterfaces() {
+    final controller = StreamController<List<NetworkInterface>>();
 
-      controller.add(address);
+    _updateInterfaceList(controller);
 
-    });
+    Timer.periodic(
+      ipAddressRefreshDelay,
+      (timer) => _updateInterfaceList(controller),
+    );
     return controller.stream;
+  }
+
+  static _updateInterfaceList(
+      StreamController<List<NetworkInterface>> controller) async {
+    final interfaceList = await NetworkInterface.list();
+    List<NetworkInterface> interfaces = [];
+
+    for (final interface in interfaceList) {
+      interfaces.add(interface);
+    }
+
+    controller.add(interfaces);
   }
 }
