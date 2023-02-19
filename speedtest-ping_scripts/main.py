@@ -1,11 +1,13 @@
 import json
 import os
 import datetime
+import sys
 from pythonping import ping
 
+SPEEDTEST_SERVER_ID = '24215'
 
 network_type = sys.argv[1]
-root_dns = ( # in alphabetical order
+root_dns = (  # in alphabetical order
     '198.41.0.4',
     '199.9.14.201',
     '192.33.4.12',
@@ -30,8 +32,10 @@ def speedtest(server_id):
     """
     st_results = json.loads('{}')
     try:
-        st_infos = json.loads(os.popen('speedtest -s ' + server_id + ' -P 0 -f json').read())
-        st_results['download'] = int(st_infos['download']['bandwidth']*0.000008)
+        st_infos = json.loads(
+            os.popen('speedtest -s ' + server_id + ' -P 0 -f json').read())
+        st_results['download'] = int(
+            st_infos['download']['bandwidth']*0.000008)
         st_results['upload'] = int(st_infos['upload']['bandwidth']*0.000008)
         st_results['ping'] = st_infos['ping']['latency']
         return st_results
@@ -86,4 +90,7 @@ def sum_results(st_r, ping_r, net_type):
 
 
 if __name__ == '__main__':
-    print(sum_results(speedtest('24215'), ping_root(root_dns), network_type))
+    print(sum_results(
+        speedtest(SPEEDTEST_SERVER_ID),
+        ping_root(root_dns), network_type
+    ))
