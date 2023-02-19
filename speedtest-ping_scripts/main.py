@@ -4,6 +4,7 @@ import datetime
 from pythonping import ping
 
 
+network_type = sys.argv[1]
 root_dns = ( # in alphabetical order
     '198.41.0.4',
     '199.9.14.201',
@@ -69,7 +70,7 @@ def ping_root(dns_list):
     return ping_results
 
 
-def sum_results(st_r, ping_r):
+def sum_results(st_r, ping_r, net_type):
     """
     Sum the results of speedtest and ping
     :param st_r: a dict with the results of speedtest
@@ -77,6 +78,7 @@ def sum_results(st_r, ping_r):
     :return: a dict with the results of speedtest and ping
     """
     results = json.loads('{}')
+    results['network_type'] = net_type
     results['timestamp'] = datetime.datetime.now().isoformat()
     results['speedtest'] = st_r
     results['ping'] = ping_r
@@ -84,4 +86,4 @@ def sum_results(st_r, ping_r):
 
 
 if __name__ == '__main__':
-    print(sum_results(speedtest('24215'), ping_root(root_dns)))
+    print(sum_results(speedtest('24215'), ping_root(root_dns), network_type))
