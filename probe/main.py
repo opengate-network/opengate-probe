@@ -7,7 +7,7 @@ if __name__ == '__main__':
     results = []
 
     route_out: str = subprocess.check_output('ip r', shell=True)
-    route_list = route_out.split('\n')
+    route_list = str(route_out, 'UTF-8').split('\n')
 
     eth_route = ""
     wifi_route = ""
