@@ -65,10 +65,11 @@ def ping_root(dns_list):
     """
     ping_results = json.loads('{}')
     for dns in dns_list:
-        if get_ping(dns) >= 2000:
+        ping = get_ping(dns)
+        if ping is None or ping >= 2000:
             delay = None
         else:
-            delay = get_ping(dns)
+            delay = ping
         ping_results[dns] = delay
     return ping_results
 
