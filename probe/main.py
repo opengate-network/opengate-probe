@@ -21,18 +21,14 @@ if __name__ == '__main__':
     print(f"Route found : \nwifi: {wifi_route}\neth: {eth_route}")
 
     if eth_route != "":
-        os.system('ip r del ' + wifi_route)
-        os.system('ip r flush cache')
+        os.system('nmcli device disconnect eth0')
         results.append(get_complete_results(network_type="ethernet"))
-        os.system('ip r add ' + wifi_route)
-        os.system('ip r flush cache')
+        os.system('nmcli device connect eth0')
 
     if wifi_route != "":
-        os.system('ip r del ' + eth_route)
-        os.system('ip r flush cache')
+        os.system('nmcli device disconnect wlp1s0')
         results.append(get_complete_results(network_type="wifi"))
-        os.system('ip r add ' + eth_route)
-        os.system('ip r flush cache')
+        os.system('nmcli device connect wlp1s0')
 
     json_results = json.dumps(results, indent=4)
 
