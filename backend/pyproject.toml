@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "probe-api"
+version = "0.1.0"
+description = ""
+authors = ["Corentin Poupry <corentin.poupry@outlook.com>"]
+readme = "README.md"
+packages = [{include = "probe_api"}]
+
+[tool.poetry.scripts]
+start = "app:start"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.92.0"
+uvicorn = {extras = ["standard"], version = "^0.20.0"}
+pydantic = "^1.10.5"
+influxdb-client = "^1.36.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
