@@ -22,13 +22,17 @@ if __name__ == '__main__':
 
     if eth_route != "":
         os.system('ip r del ' + wifi_route)
+        os.system('ip r flush cache')
         results.append(get_complete_results(network_type="ethernet"))
         os.system('ip r add ' + wifi_route)
+        os.system('ip r flush cache')
 
     if wifi_route != "":
         os.system('ip r del ' + eth_route)
+        os.system('ip r flush cache')
         results.append(get_complete_results(network_type="wifi"))
         os.system('ip r add ' + eth_route)
+        os.system('ip r flush cache')
 
     json_results = json.dumps(results, indent=4)
 

@@ -189,7 +189,7 @@ class ConnectionBar extends StatelessWidget {
   final wifiInfo = InfoProvider.wifiInfo();
   final interfaceStream = InfoProvider.interfaces();
 
-  static const IconColor = Color(0xff616161);
+  static const iconColor = Color(0xff616161);
 
   ConnectionBar({super.key});
 
@@ -238,7 +238,7 @@ class ConnectionBar extends StatelessWidget {
                 children: [
                   Icon(
                     wifiIcon,
-                    color: IconColor,
+                    color: iconColor,
                     size: 20,
                   ),
                   const SizedBox(width: 5),
@@ -265,13 +265,13 @@ class ConnectionBar extends StatelessWidget {
                   noEthernet
                       ? const Icon(
                           Icons.not_interested,
-                          color: IconColor,
+                          color: iconColor,
                           size: 20,
                         )
                       : const SizedBox(),
                   const Icon(
                     Icons.settings_ethernet_sharp,
-                    color: IconColor,
+                    color: iconColor,
                     size: 20,
                   ),
                 ],
