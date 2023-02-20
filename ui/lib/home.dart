@@ -167,7 +167,7 @@ class HomeMenuButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         onTap: onTap,
         child: SizedBox(
-          width: 95,
+          width: 100,
           height: 90,
           child: Padding(
             padding: const EdgeInsets.all(5),
