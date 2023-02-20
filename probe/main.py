@@ -1,11 +1,12 @@
 import os
+import subprocess
 import json
 from speedtest import get_complete_results
 
 if __name__ == '__main__':
     results = []
 
-    route_out: str = os.system('ip r')
+    route_out: str = subprocess.check_output('ip r', shell=True)
     route_list = route_out.split('\n')
 
     eth_route = ""
