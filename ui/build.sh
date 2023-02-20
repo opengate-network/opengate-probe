@@ -1,0 +1,1 @@
+/home/louis/flutter-engine-binaries-for-arm/arm64/gen_snapshot_linux_x64_release --deterministic --snapshot_kind=app-aot-elf --elf=build/flutter_assets/app.so --strip build/kernel_snapshot.dill

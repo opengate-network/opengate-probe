@@ -6,7 +6,7 @@ import 'package:opengate_probe/info_provider.dart';
 class InterfaceInformationPage extends StatelessWidget {
   InterfaceInformationPage({super.key});
 
-  final interfaceStream = InfoProvider.interfacesInterfaces();
+  final interfaceStream = InfoProvider.interfaces();
 
   @override
   Widget build(BuildContext context) {
@@ -19,43 +19,47 @@ class InterfaceInformationPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: SizedBox(
           width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              StreamBuilder(
-                stream: interfaceStream,
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return const Text("Chargement...");
-                  }
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                StreamBuilder(
+                  stream: interfaceStream,
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Text("Loading ...");
+                    }
 
-                  List<NetworkInterface> interfaces = snapshot.data ?? [];
+                    List<NetworkInterface> interfaces = snapshot.data ?? [];
 
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: interfaces
-                        .map(
-                          (interface) => Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                interface.name,
-                                style: textTheme.titleSmall,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: interface.addresses
-                                    .map((address) => Text(address.address))
-                                    .toList(),
-                              ),
-                            ],
-                          ),
-                        )
-                        .toList(),
-                  );
-                },
-              ),
-            ],
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: interfaces
+                          .map(
+                            (interface) => Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  interface.name,
+                                  style: textTheme.titleSmall,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: interface.addresses
+                                      .map((address) => Text(address.address))
+                                      .toList(),
+                                ),
+                                const SizedBox(height: 10),
+                              ],
+                            ),
+                          )
+                          .toList(),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

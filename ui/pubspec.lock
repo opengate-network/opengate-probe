@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.10.0"
+  at_gauges:
+    dependency: "direct main"
+    description:
+      name: at_gauges
+      sha256: c993d2e7836721e187b6d1a2eefc4a92b99b494fbe573ba0775e3a366453d20f
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -184,5 +192,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  virtual_keyboard_multi_language:
+    dependency: "direct main"
+    description:
+      name: virtual_keyboard_multi_language
+      sha256: b2190ec3dd94022c64ace96847ab2a40a2565acc9052a0324f6332d5500aee7a
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
 sdks:
   dart: ">=2.19.2 <3.0.0"
