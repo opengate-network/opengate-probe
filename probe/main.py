@@ -21,14 +21,14 @@ if __name__ == '__main__':
     print(f"Route found : \nwifi: {wifi_route}\neth: {eth_route}")
 
     if eth_route != "":
-        os.system('ip del ' + wifi_route)
+        os.system('ip r del ' + wifi_route)
         results.append(get_complete_results(network_type="ethernet"))
-        os.system('ip add ' + wifi_route)
+        os.system('ip r add ' + wifi_route)
 
     if wifi_route != "":
-        os.system('ip del ' + eth_route)
+        os.system('ip r del ' + eth_route)
         results.append(get_complete_results(network_type="wifi"))
-        os.system('ip add ' + eth_route)
+        os.system('ip r add ' + eth_route)
 
     json_results = json.dumps(results, indent=4)
 
