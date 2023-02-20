@@ -5,11 +5,29 @@ from speedtest import get_complete_results
 if __name__ == '__main__':
     results = []
 
-    os.system('')
-    results.append(get_complete_results(network_type="ethernet"))
+    route_out: str = os.system('ip r')
+    route_list = route_out.split('\n')
 
-    os.system('')
-    results.append(get_complete_results(network_type="wifi"))
+    eth_route = ""
+    wifi_route = ""
+    for route in route_list:
+        if "default" in route:
+            if "wlp1s0" in route:
+                wifi_route = route
+            elif "eth0" in route:
+                eth_route = route
+
+    print(f"Route found : \nwifi: {wifi_route}\neth: {eth_route}")
+
+    if eth_route != "":
+        os.system('ip del ' + wifi_route)
+        results.append(get_complete_results(network_type="ethernet"))
+        os.system('ip add ' + wifi_route)
+
+    if wifi_route != "":
+        os.system('ip del ' + eth_route)
+        results.append(get_complete_results(network_type="wifi"))
+        os.system('ip add ' + eth_route)
 
     json_results = json.dumps(results, indent=4)
 
