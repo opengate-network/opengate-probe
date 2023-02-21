@@ -9,7 +9,6 @@ class SpeedtestPage extends StatelessWidget {
 
   SpeedtestPage({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -32,7 +31,9 @@ class SpeedtestPage extends StatelessWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Last speedtest : ${results[0].date}"),
+                  results.isEmpty
+                      ? const Text("No speedtest data")
+                      : Text("Last speedtest : ${results[0].date}"),
                   ...results
                       .map((e) => Column(
                             children: [
