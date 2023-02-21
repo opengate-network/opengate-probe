@@ -72,7 +72,9 @@ class HomeResult extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Last speedtest : ${results[0].date}"),
+              results.isEmpty
+                  ? const Text("No speedtest data")
+                  : Text("Last speedtest : ${results[0].date}"),
             ],
           );
         },
