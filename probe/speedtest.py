@@ -32,11 +32,10 @@ def speedtest(server_id):
     st_results = json.loads('{}')
     try:
         st_infos = json.loads(
-            os.popen('speedtest -s ' + server_id + ' -P 0 -f json').read())
-        st_results['download'] = int(
-            st_infos['download']['bandwidth']*0.000008)
-        st_results['upload'] = int(st_infos['upload']['bandwidth']*0.000008)
-        st_results['ping'] = st_infos['ping']['latency']
+            os.popen('fast --upload --json').read())
+        st_results['download'] = int(st_infos['downloadSpeed'])
+        st_results['upload'] = int(st_infos['uploadSpeed'])
+        st_results['ping'] = float(st_infos['latency'])
         return st_results
     except Exception as e:
         print(e)
