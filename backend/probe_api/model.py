@@ -14,6 +14,7 @@ class Measure(BaseModel):
     """A complete measurement performed by the probe"""
     timestamp: datetime = Field(description="ISO 8601 timestamp of when the test was started on the prob")
     speedtest: Speedtest = Field(description="Performance of the speedtest performed")
+    connection_type: str = Field(description="Connection type of the speedtest perfomed (ex: wifi)")
     ping: dict[str, int | None] = Field(
         description="Performance of pings performed. The result is in milliseconds or null if the ping failed"
     )
@@ -23,6 +24,7 @@ class Measure(BaseModel):
         schema_extra = {
             "example": {
                 "timestamp": "2023-02-15T23:14:13.043318",
+                "connection_type": "wifi",
                 "speedtest": {
                     "download": 712,
                     "upload": 442,
