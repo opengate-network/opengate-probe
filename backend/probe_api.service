@@ -1,0 +1,14 @@
+[Unit]
+Description=probe_api
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/root/opengate-probe/backend
+LimitNOFILE=4096
+ExecStart=/root/.local/bin/poetry run gunicorn main:app --workers 2 -k uvicorn.workers.UvicornWorker --bind 127.0.0.1:8001 --chdir /root/opengate-probe/backend/probe_api
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
