@@ -2,6 +2,9 @@ import os
 import subprocess
 import json
 from speedtest import get_complete_results
+import requests
+
+API_ENDPOINT = 'https://probe.opengate.space/measure'
 
 if __name__ == '__main__':
     results = []
@@ -34,3 +37,5 @@ if __name__ == '__main__':
 
     with open("/results.json", "w") as outfile:
         outfile.write(json_results)
+
+    requests.post(API_ENDPOINT, json=results)

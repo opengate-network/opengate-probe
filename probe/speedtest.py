@@ -81,7 +81,7 @@ def sum_results(st_r, ping_r, net_type):
     :return: a dict with the results of speedtest and ping
     """
     results = json.loads('{}')
-    results['network_type'] = net_type
+    results['connection_type'] = net_type
     results['timestamp'] = datetime.datetime.now().isoformat()
     results['speedtest'] = st_r
     results['ping'] = ping_r
