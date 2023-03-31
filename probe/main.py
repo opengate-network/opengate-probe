@@ -38,5 +38,6 @@ if __name__ == '__main__':
     with open("/results.json", "w") as outfile:
         outfile.write(json_results)
 
-    req = requests.post(API_ENDPOINT, json=results)
-    print(req.text)
+    for result in results:
+        req = requests.post(API_ENDPOINT, json=result)
+        print(req.text)
