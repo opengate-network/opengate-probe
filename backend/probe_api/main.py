@@ -31,6 +31,27 @@ def post_measure(measure: Measure, influx: WriteApi = Depends(influx_write)):
         .field("down", measure.speedtest.download)
 
     influx.write(bucket="probe", org="opengate", record=p)
+
+    p = Point("ping")\
+        .time(measure.timestamp)\
+        .field("type", measure.connection_type)\
+        .measurement(measure.speedtest.ping)
+
+    influx.write(bucket="probe", org="opengate", record=p)
+
+    p = Point("upload")\
+        .time(measure.timestamp)\
+        .field("type", measure.connection_type)\
+        .measurement(measure.speedtest.upload)
+
+    influx.write(bucket="probe", org="opengate", record=p)
+
+    p = Point("download")\
+        .time(measure.timestamp)\
+        .field("type", measure.connection_type)\
+        .measurement(measure.speedtest.download)
+
+    influx.write(bucket="probe", org="opengate", record=p)
     influx.flush()
 
     return "ok"
