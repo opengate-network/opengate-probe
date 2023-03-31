@@ -207,10 +207,10 @@ class ConnectionBar extends StatelessWidget {
             stream: wifiInfo,
             builder: (context, snapshot) {
               final data = snapshot.data ?? [];
+
               final info = data.isNotEmpty ? data[0] : WifiInfoModel.empty;
 
               IconData wifiIcon = Icons.signal_wifi_off;
-
               if (!snapshot.hasData) {
                 wifiIcon = Icons.wifi_find_outlined;
               } else if (info.signal > 0) {

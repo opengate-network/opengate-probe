@@ -53,7 +53,7 @@ class InfoProvider {
     } on PathNotFoundException catch (_, __) {
       resultContent = """[
     {
-        "network_type": "ethernet",
+        "connection_type": "ethernet",
         "timestamp": "2023-02-20T12:31:03.891784",
         "speedtest": {
             "download": 31,
@@ -107,7 +107,7 @@ class InfoProvider {
 
     controller.add(resultData
         .map((res) => ResultModel(
-              type: res['network_type'],
+              type: res['connection_type'],
               download: res['speedtest']?['download'] ?? -1,
               upload: res['speedtest']?['upload'] ?? -1,
               ping: res['speedtest']?['ping'] ?? -1,
@@ -134,6 +134,7 @@ class InfoProvider {
         await Process.run('/home/pi/.local/bin/jc', ['iwconfig']);
     List<dynamic> wifi = [];
     try {
+      print(commandResult.stdout);
       wifi = jsonDecode(commandResult.stdout) as List<dynamic>;
     } on FormatException catch (e) {
       print(e);
